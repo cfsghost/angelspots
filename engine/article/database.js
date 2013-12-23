@@ -8,7 +8,7 @@ var model = {
 	schema: new DBHouse.Schema({
 		_id: { type: 'UUID' },
 		author: { type: 'String' },
-		author_id: { type: 'String' },
+		author_id: { type: 'UUID' },
 		subject: { type: 'String' },
 		content: { type: 'String' },
 		created: { type: 'Date', default: Date.now }
@@ -21,7 +21,6 @@ var model = {
 
 module.exports = {
 	dbHouse: new DBHouse(),
-	settings: {},
 	model: model,
 	db: null
 };

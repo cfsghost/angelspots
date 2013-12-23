@@ -1,5 +1,8 @@
 
-// Example
-App.require('MyEngine', function() {
-	var myEngine = App.Engine('MyEngine');
+App.require('Article', function() {
+	var article = App.Engine('Article');
+
+	article.listArticles({}, function(err, articles) {
+
+	});
 });

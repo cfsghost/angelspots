@@ -10,11 +10,12 @@ Article.prototype.listArticles = function(condition, callback) {
 	var engine = Article.engine;
 	var model = engine.database.model;
 	var db = engine.database.db;
-	var dbSettings = engine.database.settings;
+	var dbSettings = engine.settings.database;
 
 	db.open(dbSettings.dbName)
 		.collection(dbSettings.table)
 		.model(model.schema)
+		.where({})
 		.query(function(err, rows) {
 
 			if (err) {
