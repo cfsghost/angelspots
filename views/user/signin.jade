@@ -1,0 +1,40 @@
+extends ../layouts/default
+
+block script
+	script(type='text/javascript', src='/views/user/signin.js')
+
+block body
+	div.ui.page.grid.segment
+		div.ui.four.wide.column
+		div.eight.wide.column
+
+			div.ui.fluid.form
+				h1.ui.dividing.header Sign In
+				div.ui.error.message
+					div.header
+					p
+
+				div.field#signin_field_username
+					label Username or e-mail
+					div.ui.left.icon.input
+						input#signin_username(type='text', placeholder='username@example.com')
+						i.user.icon
+					div.ui.red.pointing.above.label.transition.hidden
+
+				div.field#signin_field_password
+					label Password
+					div.ui.left.icon.input
+						input#signin_password(type='password')
+						i.lock.icon
+					div.ui.red.pointing.above.label.transition.hidden
+
+				div.ui.purple.submit.button#signin_submit_btn Sign In
+
+			div.ui.icon.info.message
+				i.icon.help
+				div.content
+					div No account?
+						!=' '
+						a(href='/signup') Sign Up!
+					div
+						a(href='/forget') Forget your password?

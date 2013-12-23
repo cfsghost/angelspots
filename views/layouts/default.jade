@@ -1,0 +1,43 @@
+doctype 5
+html
+	head
+		meta#viewport(content='width=device-width, initial-scale=1.0')
+		title #{configs.app.service_name}
+		link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700', rel='stylesheet', type='text/css')
+		link(href='/css/semantic.min.css', media='all', rel='stylesheet', type='text/css')
+		link(href='/css/default.css', media='all', rel='stylesheet', type='text/css')
+		script(type='text/javascript', src='/frex')
+		script(type='text/javascript', src='/js/jquery.min.js')
+		script(type='text/javascript', src='/js/semantic.min.js')
+		script
+			$(function() {
+				$('.popup').popup();
+				$('.dropdown').dropdown();
+			});
+		block script
+	body
+
+		div.sidebar.top.fixed.navbar
+			div.ui.menu.secondary.pointing.inverted
+				a.item.header(href='/') #{configs.app.service_name}
+
+				div.right.menu
+					- if (session.name)
+						div.ui.dropdown.item
+							i.user.icon
+							span#session_username #{session.name}
+							i.dropdown.icon
+							div.menu
+								a.item(href='/profile')
+									i.edit.icon
+									!='Edit Profile'
+								a.item(href='/signout')
+									i.sign.out.icon
+									!='Sign Out'
+					- else
+						a.item.popup(href='/signin', data-content='Sign In right now', data-position='bottom center', data-variation='inverted') Sign In
+
+		block body
+
+		div.ui.grid.nature.segment
+			div.column.aligned.right #{configs.app.owner.name}
