@@ -24,6 +24,8 @@ html
 
 					div.right.menu
 						- if (session.name)
+							div.item
+								i.plus.icon
 							div.ui.dropdown.item
 								i.user.icon
 								!= session.name
