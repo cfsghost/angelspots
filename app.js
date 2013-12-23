@@ -37,6 +37,17 @@ configManager.load(function(err, configs) {
 				mailer: configs.app.mailer
 			});
 
+			// Article engine
+			app.frex.setEngine('Article', {
+				database: {
+					driver: configs.app.database.type,
+					host: configs.app.database.host,
+					port: configs.app.database.port,
+					dbName: configs.app.database.dbName,
+					table: 'article'
+				}
+			});
+
 			// Template engine
 			app.set('views', __dirname + '/views');
 			app.set('view engine', 'jade');
