@@ -9,9 +9,12 @@ var model = {
 		_id: { type: 'UUID' },
 		name: { type: 'String' },
 		email: { type: 'String' },
+		username: { type: 'String' },
 		password: { type: 'String' },
 		token: { type: 'String' },
-		created: { type: 'Date' }
+		permission: { type: 'Dict', subtype: 'Boolean' },
+		created: { type: 'Date' },
+		disabled: { type: 'Boolean' }
 	}),
 	index: new DBHouse.Index([
 	    { fields: [ 'name' ] },
