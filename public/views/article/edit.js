@@ -8,7 +8,7 @@ App.require('Article', function() {
 	});
 	var editor = ace.edit('form_content_editor');
 	editor.container.style.fontFamily = 'Droid Sans Mono';
-	editor.setFontSize(14);
+	editor.setFontSize(16);
 	editor.setTheme('ace/theme/tomorrow');
 
 	var MarkdownMode = require('ace/mode/markdown').Mode;
@@ -39,16 +39,16 @@ App.require('Article', function() {
 			if (err)
 				return;
 
-			console.log(doc._id);
 			$('#article_id').val(doc._id);
 		});
 	});
 
 	// Getting content
 	if ($('#article_id').val()) {
+
 		article.getArticle($('#article_id').val(), function(err, doc) {
 			$('#article_subject').val(doc.subject);
-			editor.setValue(doc.content);
+			editor.setValue(doc.content, -1);
 		});
 	}
 });

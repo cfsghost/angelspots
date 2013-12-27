@@ -3,20 +3,20 @@ App.require('Article', function() {
 	var article = App.Engine('Article');
 
 	article.listArticles({}, function(err, articles) {
-		console.log(articles);
 
 		articles.forEach(function(doc, index, arr) {
 
-			var $row = $('<div>').addClass('item');
 			var $content = $('<div>').addClass('content');
 			var $header = $('<div>').addClass('header').text(doc.subject);
-			var $link = $('<a>').attr('href', '/edit_article/' + doc._id);
+			var $link = $('<a>').attr('href', '/edit_article/' + doc._id).addClass('item');
+			var $publish_label = $('<div>').addClass('ui label red right floated').text('Not yet published');
 
 			$content.append($header);
-			$link.append($content);
-			$row.append($link);
+			$link
+				.append($content)
+				.append($publish_label);
 
-			$('#article_list').append($row);
+			$('#article_list').append($link);
 		});
 	});
 });
