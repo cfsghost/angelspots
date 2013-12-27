@@ -1,6 +1,3 @@
-[submodule "public/js/epiceditor"]
-	path = 3rd_party/epiceditor
-	url = git@github.com:OscarGodson/EpicEditor.git
 [submodule "3rd_party/ace"]
 	path = 3rd_party/ace
 	url = git@github.com:ajaxorg/ace.git
