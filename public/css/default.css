@@ -81,3 +81,9 @@ a:hover {
 	left: 95px;
 	position: fixed;
 }
+
+.sidepanel {
+	position: fixed;
+	top: 58px;
+	z-index: 500;
+}

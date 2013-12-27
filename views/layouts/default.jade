@@ -3,7 +3,7 @@ html
 	head
 		meta#viewport(content='width=device-width, initial-scale=1.0')
 		title #{configs.app.service_name}
-		link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700', rel='stylesheet', type='text/css')
+		link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700|Droid+Sans+Mono:400', rel='stylesheet', type='text/css')
 		link(href='/css/semantic.min.css', media='all', rel='stylesheet', type='text/css')
 		link(href='/css/default.css', media='all', rel='stylesheet', type='text/css')
 		script(type='text/javascript', src='/frex')
@@ -23,8 +23,11 @@ html
 
 				div.right.menu
 					- if (session.name)
-						a.item.popup(href='/new_article', data-content='Create a new article', data-position='bottom center', data-variation='inverted')
+						a.item.popup(href='/edit_article', data-content='Create a new article', data-position='bottom center', data-variation='inverted')
 							i.plus.icon
+
+						a.item.popup(href='/list_article', data-content='List articles', data-position='bottom center', data-variation='inverted')
+							i.list.icon
 
 						div.ui.dropdown.item
 							i.user.icon

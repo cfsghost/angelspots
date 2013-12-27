@@ -1,0 +1,64 @@
+extends ../layouts/default
+
+block script
+	script(type='text/javascript', src='/epiceditor/js/epiceditor.min.js')
+	script(type='text/javascript', src='/js/ace/ace.js', charset='utf-8')
+	script(type='text/javascript', src='/js/ace/mode-markdown.js', charset='utf-8')
+	script(type='text/javascript', src='/js/ace/theme-tomorrow.js', charset='utf-8')
+	script(type='text/javascript', src='/views/article/edit.js')
+
+block body
+
+	input#article_id(type='hidden', value='#{article_id}')
+
+	div.sidepanel
+
+		div.ui.teal.button#sidepanel_publish_button Publish
+
+	div.ui.page.grid
+		div.sixteen.wide.column
+
+			div.ui.input.icon.left.fluid
+				input#article_subject(type='text', name='name', placeholder='Subject')
+				i.bookmark.icon
+
+			div.attached.message
+				div.header
+
+					div.ui.icon.buttons
+
+						div.ui.button.black#toolbar_save(data-content='Save', data-position='bottom center', data-variation='inverted')
+							i.save.icon
+
+						div.ui.button.black(data-content='Preview', data-position='bottom center', data-variation='inverted')
+							i.unhide.icon
+
+			div.ui.fluid.form.attached.purple.segment
+
+				div.field
+
+					div.ui.segment#form_content_editor
+						
+
+	div.ui.small.modal#publish_dialog
+
+		div.header Publish Your Article
+
+		div.content
+
+			div.left
+				i.help.icon
+
+			div.right
+				p Are your ready to publish this article?
+
+		div.actions
+			div.two.fluid.ui.buttons
+
+				div.ui.negative.labeled.icon.button
+					i.remove.icon
+					!='No'
+
+				div.ui.positive.labeled.icon.button.right
+					i.checkmark.icon
+					!='Yes'
