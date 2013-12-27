@@ -87,22 +87,17 @@ Article.prototype.updateArticle = function(id, article, callback) {
 			subject: article.subject || '',
 			content: article.content || '',
 			updated: Date.now()
-		}, { return_new_data: true } ,function(err, rows) {
+		}, { return_new_data: true } ,function(err, row) {
 
 			if (err) {
 				callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
 				return;
 			}
 
-			if (!rows.length) {
-				callback(new Article.frex.Error('Failed', engine.statuscode.INVALID));
-				return;
-			}
-
 			callback(null, {
-				_id: rows[0]._id,
-				subject: rows[0].subject,
-				content: rows[0].content
+				_id: row._id,
+				subject: row.subject,
+				content: row.content
 			});
 		});
 };
