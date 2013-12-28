@@ -11,6 +11,7 @@ var model = {
 		author_id: { type: 'UUID' },
 		subject: { type: 'String' },
 		content: { type: 'String' },
+		html: { type: 'String' },
 		published: { type: 'Boolean', default: false },
 		updated: { type: 'Date', default: Date.now },
 		created: { type: 'Date', default: Date.now }

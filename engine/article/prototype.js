@@ -1,5 +1,7 @@
 "use strict";
 
+var marked = require('marked');
+
 var Article = module.exports = function() {
 	var self = this;
 };
@@ -11,6 +13,9 @@ Article.prototype.listArticles = function(condition, callback) {
 	var model = engine.database.model;
 	var db = engine.database.db;
 	var dbSettings = engine.settings.database;
+
+	if (!(callback instanceof Function))
+		return;
 
 	db.open(dbSettings.dbName)
 		.collection(dbSettings.table)
@@ -37,34 +42,84 @@ Article.prototype.listArticles = function(condition, callback) {
 Article.prototype.updateArticle = function(id, article, callback) {
 	var self = this;
 
-	if (!(article instanceof Object)) {
-		callback(new Article.frex.Error('Failed', engine.statuscode.INVALID));
-		return;
-	}
-
-	var conn = Article.frex.getConnection(arguments);
 	var engine = Article.engine;
 	var model = engine.database.model;
 	var db = engine.database.db;
 	var dbSettings = engine.settings.database;
 
-	if (id == '' || !id) {
+	if (!(callback instanceof Function))
+		return;
 
-		// Create a new article
+	if (!(article instanceof Object)) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.INVALID));
+		return;
+	}
+
+	// Check permission
+	var conn = Article.frex.getConnection(arguments);
+	if (!conn.req.session.permission) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+		return;
+	}
+
+	if (!conn.req.session.permission.admin) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+		return;
+	}
+
+	var html = '';
+	marked(article.content || '', function(err, content) {
+		if (!err)
+			html = content;
+
+		if (id == '' || !id) {
+
+			// Create a new article
+			db.open(dbSettings.dbName)
+				.collection(dbSettings.table)
+				.model(model.schema)
+				.insert({
+					subject: article.subject || '',
+					content: article.content || '',
+					html: html
+				}, function(err, row) {
+
+					if (err) {
+						callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+						return;
+					}
+
+					// Send article information back
+					callback(null, {
+						_id: row._id,
+						subject: row.subject,
+						content: row.content
+					});
+				});
+
+			return;
+		}
+
+		// Update article existed
 		db.open(dbSettings.dbName)
 			.collection(dbSettings.table)
 			.model(model.schema)
-			.insert({
+			.where({
+				_id: id
+			})
+			.limit(1)
+			.update({
 				subject: article.subject || '',
-				content: article.content || ''
-			}, function(err, row) {
+				content: article.content || '',
+				html: html,
+				updated: Date.now()
+			}, { return_new_data: true } ,function(err, row) {
 
 				if (err) {
 					callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
 					return;
 				}
 
-				// Send article information back
 				callback(null, {
 					_id: row._id,
 					subject: row.subject,
@@ -72,34 +127,7 @@ Article.prototype.updateArticle = function(id, article, callback) {
 				});
 			});
 
-		return;
-	}
-
-	// Update article existed
-	db.open(dbSettings.dbName)
-		.collection(dbSettings.table)
-		.model(model.schema)
-		.where({
-			_id: id
-		})
-		.limit(1)
-		.update({
-			subject: article.subject || '',
-			content: article.content || '',
-			updated: Date.now()
-		}, { return_new_data: true } ,function(err, row) {
-
-			if (err) {
-				callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
-				return;
-			}
-
-			callback(null, {
-				_id: row._id,
-				subject: row.subject,
-				content: row.content
-			});
-		});
+	});
 };
 
 Article.prototype.getArticle = function(id, callback) {
@@ -110,12 +138,60 @@ Article.prototype.getArticle = function(id, callback) {
 	var db = engine.database.db;
 	var dbSettings = engine.settings.database;
 
+	if (!(callback instanceof Function))
+		return;
+
 	db.open(dbSettings.dbName)
 		.collection(dbSettings.table)
 		.model(model.schema)
 		.where({
 			_id: id
 		})
+		.limit(1)
+		.query(function(err, rows) {
+
+			if (err) {
+				callback(new Article.frex.Error('There is problem happened to article database'));
+				return;
+			}
+
+			// No such article
+			if (rows.length == 0) {
+				callback(new Article.frex.Error('No article we have'));
+				return;
+			}
+
+			callback(null, rows[0]);
+		});
+};
+
+Article.prototype.getArticleWithCondition = function(condition, opts, callback) {
+	var self = this;
+
+	var conn = Article.frex.getConnection(arguments);
+	var engine = Article.engine;
+	var model = engine.database.model;
+	var db = engine.database.db;
+	var dbSettings = engine.settings.database;
+
+	if (!(callback instanceof Function))
+		return;
+
+	if (!(condition instanceof Object)) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.INVALID));
+		return;
+	}
+
+	if (!(opts instanceof Object)) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.INVALID));
+		return;
+	}
+
+	db.open(dbSettings.dbName)
+		.collection(dbSettings.table)
+		.model(model.schema)
+		.where(condition)
+		.order('updated', -1)
 		.limit(1)
 		.query(function(err, rows) {
 

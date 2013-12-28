@@ -1,35 +1,20 @@
 extends layouts/home
 
 block script
+	link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
 	script(type='text/javascript', src='/views/index.js')
+	script(type='text/javascript', src='/js/modernizr.custom.js')
+	script(type='text/javascript', src='/js/jquerypp.custom.js')
+	script(type='text/javascript', src='/js/jquery.bookblock.min.js')
 
 block information
 	div.ui.information.transition
 		h1.ui.inverted.header #{configs.app.service_name}
-		p Easy and fast to build up your web service.
+		p The thuth about startup life to inspire you
+
+	div.ui.center.angelspots
+		div.bb-bookblock#book
+			div.bb-item#article_content
+			div.bb-item 12312213
 
 block body
-	div.ui.page.grid.overview.segment
-		div.ui.two.wide.column
-		div.twelve.wide.column
-			div.ui.three.column.center.aligned.stackable.divided.grid
-				div.column
-					div.ui.icon.header
-						i.circular.rocket.link.icon
-						!='frex.js'
-
-					p More powerful Express-based web framework
-
-				div.column
-					div.ui.icon.header
-						i.circular.magic.link.icon
-						!='Semantic UI'
-
-					p Easy-to-use and fantastic front-end UI framework
-
-				div.column
-					div.ui.icon.header
-						i.circular.coffee.link.icon
-						!='Node.js'
-
-					p Great server-side application platform for easily building fast
