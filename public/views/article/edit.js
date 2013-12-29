@@ -4,6 +4,11 @@ App.require('Article', function() {
 
 	var state = 'initialize';
 
+	if (window.location.hash) {
+		var article_id = window.location.hash.replace('#', '');
+		$('#article_id').val(article_id);
+	}
+
 	// Save
 	var saveRequired = false;
 	var saveRunner;
@@ -22,6 +27,10 @@ App.require('Article', function() {
 			if (err) {
 				callback(err)
 				return;
+			}
+
+			if (!$('#article_id').val()) {
+				location.href = '#' + doc._id;
 			}
 
 			$('#article_id').val(doc._id);
@@ -104,6 +113,31 @@ App.require('Article', function() {
 		}
 	});
 
+	function autosaveInit() {
+
+		// Intializing auto-save
+		saveRequired = false;
+		state = 'ready';
+
+		function autosave() {
+			console.log(state);
+			if (!saveRequired)
+				return;
+
+			if (state == 'saving')
+				return;
+
+			// Saving it right now
+			save(function(err, doc) {
+				$('#form_content_previewer').html(doc.html);
+
+				saveRunner = setTimeout(autosave, 3000);
+			});
+		}
+
+		saveRunner = setTimeout(autosave, 3000);
+	}
+
 	// Getting content
 	if ($('#article_id').val()) {
 
@@ -112,23 +146,9 @@ App.require('Article', function() {
 			$('#form_content_previewer').html(doc.html);
 			editor.setValue(doc.content, -1);
 
-			// Intializing auto-save
-			saveRequired = false;
-			state = 'ready';
-			saveRunner = setInterval(function() {
-				if (!saveRequired)
-					return;
-
-				if (state == 'saving')
-					return;
-
-				// Saving it right now
-				save(function(err, doc) {
-					$('#form_content_previewer').html(doc.html);
-				});
-
-			}, 3000);
-
+			autosaveInit();
 		});
+	} else {
+		autosaveInit();
 	}
 });
