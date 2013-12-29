@@ -1,6 +1,6 @@
-[submodule "3rd_party/ace"]
-	path = 3rd_party/ace
-	url = git@github.com:ajaxorg/ace.git
 [submodule "3rd_party/BookBlock"]
 	path = 3rd_party/BookBlock
 	url = git@github.com:codrops/BookBlock.git
+[submodule "3rd_party/CodeMirror"]
+	path = 3rd_party/CodeMirror
+	url = git@github.com:marijnh/CodeMirror.git

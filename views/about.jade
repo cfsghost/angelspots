@@ -1,0 +1,15 @@
+extends layouts/home
+
+block script
+	link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
+	script(type='text/javascript', src='/views/about.js')
+
+block information
+	div.ui.information.transition
+		h1.ui.inverted.header 關於我們
+		p About Us
+
+	div.ui.center.angelspots
+		div.text#article_content
+
+block body

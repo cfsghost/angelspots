@@ -35,21 +35,19 @@ App.require('Article', function() {
 
 	// Initializing editor
 	$('#form_content_editor').css({
-		height: 500
+		height: '100%',
+		padding: '0px'
 	});
-	var editor = ace.edit('form_content_editor');
-	editor.container.style.fontFamily = 'Droid Sans Mono';
-	editor.setFontSize(16);
-	editor.setTheme('ace/theme/tomorrow');
 
-	var MarkdownMode = require('ace/mode/markdown').Mode;
-	var session = editor.getSession()
-	session.setMode(new MarkdownMode());
-	session.setUseWrapMode(true);
-	session.setWrapLimitRange();
+	var editor = CodeMirror(document.getElementById('form_content_editor'), {
+		mode: 'markdown',
+		theme: 'base16-light',
+		lineWrapping: true
+	});
+
+	editor.setSize('100%', '100%');
 
 	editor.on('change', function() {
-
 		if (state == 'ready')
 			$('#toolbar_save').removeClass('disabled');
 

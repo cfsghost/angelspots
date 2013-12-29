@@ -1,10 +1,10 @@
 extends ../layouts/default
 
 block script
-	script(type='text/javascript', src='/epiceditor/js/epiceditor.min.js')
-	script(type='text/javascript', src='/js/ace/ace.js', charset='utf-8')
-	script(type='text/javascript', src='/js/ace/mode-markdown.js', charset='utf-8')
-	script(type='text/javascript', src='/js/ace/theme-tomorrow.js', charset='utf-8')
+	link(href='/CodeMirror/codemirror.css', rel='stylesheet', type='text/css')
+	link(href='/CodeMirror/theme/base16-light.css', rel='stylesheet', type='text/css')
+	script(type='text/javascript', src='/CodeMirror/codemirror.js', charset='utf-8')
+	script(type='text/javascript', src='/CodeMirror/mode/markdown/markdown.js', charset='utf-8')
 	script(type='text/javascript', src='/views/article/edit.js')
 
 block body

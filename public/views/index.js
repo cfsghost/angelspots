@@ -5,6 +5,9 @@ App.require('Article', function() {
 	article.getArticleWithCondition({}, {}, function(err, doc) {
 		$('#article_content').html(doc.html);
 
+		$('.bb-item').show();
+
+		return;
 		$('#book').bookblock();
 
 		$(document).on('keydown', function(e) {

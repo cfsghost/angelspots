@@ -5,6 +5,9 @@ module.exports = {
 	'/': function(req, res) {
 		res.render('index');
 	},
+	'/about': function(req, res) {
+		res.render('about');
+	},
 	'/profile': [
 		Middleware.LoginRequired,
 		function(req, res) {
