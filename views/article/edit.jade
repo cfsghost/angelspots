@@ -30,10 +30,13 @@ block body
 						div.ui.button.black.disabled#toolbar_save(data-content='Save', data-position='bottom center', data-variation='inverted')
 							i.save.icon
 
-						div.ui.button.black(data-content='Preview', data-position='bottom center', data-variation='inverted')
+						div.ui.button.black#toolbar_previewer(data-content='Preview', data-position='bottom center', data-variation='inverted')
 							i.unhide.icon
 
-			div.ui.fluid.form.attached.purple.segment#form_content_editor
+			div.ui.fluid.form.attached.purple.segment(style='padding: 0px;')
+
+				div#form_content_editor
+				div(style='display: none;')#form_content_previewer
 
 	div.ui.small.modal#publish_dialog
 
