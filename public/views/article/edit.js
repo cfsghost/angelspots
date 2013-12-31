@@ -9,11 +9,22 @@ App.require('Article', function() {
 		$('#article_id').val(article_id);
 	}
 
+	// Initializing Marked
+	var renderer = new marked.Renderer();
+	renderer.table = function(header, body) {
+		return '<table class=\"ui table segment\">' +
+			'<thead>' + header + '</thead>' +
+			'<tbody>' + body + '</tbody>' +
+			'</table>';
+	};
+
 	// Save
 	var saveRequired = false;
 	var saveRunner;
+	var savingRef = 0;
 	function save(callback) {
 
+		savingRef++;
 		saveRequired = false;
 		state = 'saving';
 
@@ -36,7 +47,9 @@ App.require('Article', function() {
 			$('#article_id').val(doc._id);
 
 			// Change status back
-			state = 'ready';
+			savingRef--;
+			if (savingRef == 0)
+				state = 'ready';
 
 			callback(err, doc);
 		});
@@ -56,7 +69,8 @@ App.require('Article', function() {
 	var editor = CodeMirror(document.getElementById('form_content_editor'), {
 		mode: 'markdown',
 		theme: 'base16-light',
-		lineWrapping: true
+		lineWrapping: true,
+		dragDrop: false
 	});
 
 	editor.setSize('100%', '100%');
@@ -66,6 +80,8 @@ App.require('Article', function() {
 			$('#toolbar_save').removeClass('disabled');
 
 		saveRequired = true;
+
+		console.log(true);
 	});
 
 	// Initializing subject input box
@@ -100,17 +116,64 @@ App.require('Article', function() {
 		});
 	});
 
-	var preview = false;
+	$('#toolbar_bold').on('click', function() {
+		editor.replaceSelection('**' + editor.getSelection() + '**');
+		editor.focus();
+	});
+
+	$('#toolbar_italic').on('click', function() {
+		editor.replaceSelection('*' + editor.getSelection() + '*');
+		editor.focus();
+	});
+
+	$('#toolbar_underline').on('click', function() {
+		editor.replaceSelection('<u>' + editor.getSelection() + '</u>');
+		editor.focus();
+	});
+
+	$('#toolbar_strikethrough').on('click', function() {
+		editor.replaceSelection('~~' + editor.getSelection() + '~~');
+		editor.focus();
+	});
+
+	$('#toolbar_link').on('click', function() {
+		editor.replaceSelection('[' + editor.getSelection() + '](http://)');
+		editor.focus();
+	});
+
+	$('#toolbar_blockquote').on('click', function() {
+		editor.replaceSelection('\n> ' + editor.getSelection() + '\n');
+		editor.focus();
+	});
+
 	$('#toolbar_previewer').on('click', function() {
-		if (preview) {
-			preview = false;
-			$('#form_content_editor').show();
-			$('#form_content_previewer').hide();
-		} else {
-			preview = true;
-			$('#form_content_editor').hide();
+		$(this)
+			.addClass('active')
+			.closest('.ui.menu')
+			.find('.item')
+			.not($(this))
+			.removeClass('active');
+
+		$('#form_content_editor').hide();
+		$('#toolbar_edit').hide();
+
+		marked(editor.getValue(), { renderer: renderer }, function(err, content) {
+			$('#form_content_previewer').html(content);
 			$('#form_content_previewer').show();
-		}
+		});
+	});
+
+	$('#toolbar_edit_mode').on('click', function() {
+		$(this)
+			.addClass('active')
+			.closest('.ui.menu')
+			.find('.item')
+			.not($(this))
+			.removeClass('active');
+
+		$('#toolbar_edit').show();
+		$('#form_content_editor').show();
+		$('#form_content_previewer').hide();
 	});
 
 	function autosaveInit() {
@@ -120,7 +183,7 @@ App.require('Article', function() {
 		state = 'ready';
 
 		function autosave() {
-			console.log(state);
+
 			if (!saveRequired)
 				return;
 
@@ -129,13 +192,10 @@ App.require('Article', function() {
 
 			// Saving it right now
 			save(function(err, doc) {
-				$('#form_content_previewer').html(doc.html);
-
-				saveRunner = setTimeout(autosave, 3000);
 			});
 		}
 
-		saveRunner = setTimeout(autosave, 3000);
+		saveRunner = setInterval(autosave, 3000);
 	}
 
 	// Getting content
@@ -143,7 +203,6 @@ App.require('Article', function() {
 
 		article.getArticle($('#article_id').val(), function(err, doc) {
 			$('#article_subject').val(doc.subject);
-			$('#form_content_previewer').html(doc.html);
 			editor.setValue(doc.content, -1);
 
 			autosaveInit();
@@ -151,4 +210,22 @@ App.require('Article', function() {
 	} else {
 		autosaveInit();
 	}
+
+	// Initializing Uploader
+	$('#upload_area').filedrop({
+		allowedfiletypes: [ 'image/jpeg', 'image/png', 'image/gif' ],
+		allowedfileextensions: [ '.jpg', '.jpeg', '.png', '.gif' ],
+		dragOver: function() {
+			$('#upload_area').css('outline', '3px dashed #aaaaaa');
+		},
+		dragLeave: function() {
+			$('#upload_area').css('outline', '0px');
+		},
+		beforeSend: function(file, i, done) {
+			$('#upload_area').css('outline', '0px');
+
+			editor.replaceRange('![Testing]()', editor.getCursor());
+			editor.focus();
+		}
+	});
 });

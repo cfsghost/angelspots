@@ -1,11 +1,14 @@
 extends ../layouts/default
 
 block script
+	link(href='/css/content.css', rel='stylesheet', type='text/css')
 	link(href='/CodeMirror/codemirror.css', rel='stylesheet', type='text/css')
 	link(href='/CodeMirror/theme/base16-light.css', rel='stylesheet', type='text/css')
+	script(type='text/javascript', src='/js/marked.js')
 	script(type='text/javascript', src='/CodeMirror/codemirror.js', charset='utf-8')
 	script(type='text/javascript', src='/CodeMirror/mode/markdown/markdown.js', charset='utf-8')
 	script(type='text/javascript', src='/views/article/edit.js')
+	script(type='text/javascript', src='/js/jquery.filedrop.js')
 
 block body
 
@@ -25,18 +28,45 @@ block body
 			div.attached.message
 				div.header
 
-					div.ui.icon.buttons
+					div.ui.menu.tabular
 
-						div.ui.button.black.disabled#toolbar_save(data-content='Save', data-position='bottom center', data-variation='inverted')
-							i.save.icon
+						div.menu.left#toolbar_edit
 
-						div.ui.button.black#toolbar_previewer(data-content='Preview', data-position='bottom center', data-variation='inverted')
-							i.unhide.icon
+							div.ui.icon.buttons
+								div.ui.button.black.disabled#toolbar_save(data-content='Save', data-position='bottom center', data-variation='inverted')
+									i.save.icon
 
-			div.ui.fluid.form.attached.purple.segment(style='padding: 0px;')
+								a.ui.button.black#toolbar_bold(data-content='Bold', data-position='bottom center', data-variation='inverted')
+									i.bold.icon
+
+								a.ui.button.black#toolbar_italic(data-content='Italic', data-position='bottom center', data-variation='inverted')
+									i.italic.icon
+
+								a.ui.button.black#toolbar_underline(data-content='Underline', data-position='bottom center', data-variation='inverted')
+									i.underline.icon
+
+								a.ui.button.black#toolbar_strikethrough(data-content='Strikethrough', data-position='bottom center', data-variation='inverted')
+									i.strikethrough.icon
+
+								a.ui.button.black#toolbar_link(data-content='Link', data-position='bottom center', data-variation='inverted')
+									i.unlink.icon
+
+								a.ui.button.black#toolbar_blockquote(data-content='Blockquote', data-position='bottom center', data-variation='inverted')
+									i.quote.right.icon
+
+						div.menu.right
+							a.ui.item.active#toolbar_edit_mode(data-content='Edit Content', data-position='bottom center', data-variation='inverted')
+								i.edit.icon
+								!='Edit'
+
+							a.ui.item#toolbar_previewer(data-content='Preview', data-position='bottom center', data-variation='inverted')
+								i.unhide.icon
+								!='Preview'
+
+			div.ui.fluid.form.attached.purple.segment#upload_area(style='padding: 0px;')
 
 				div#form_content_editor
-				div(style='display: none;')#form_content_previewer
+				div.angelspots.content(style='display: none;')#form_content_previewer
 
 	div.ui.small.modal#publish_dialog
 

@@ -2,6 +2,15 @@
 
 var marked = require('marked');
 
+// Initializing Renderer of Marked
+var renderer = new marked.Renderer();
+renderer.table = function(header, body) {
+	return '<table class=\"ui table segment\">' +
+		'<thead>' + header + '</thead>' +
+		'<tbody>' + body + '</tbody>' +
+		'</table>';
+};
+
 var Article = module.exports = function() {
 	var self = this;
 };
@@ -68,7 +77,7 @@ Article.prototype.updateArticle = function(id, article, callback) {
 	}
 
 	var html = '';
-	marked(article.content || '', function(err, content) {
+	marked(article.content || '', { renderer: renderer }, function(err, content) {
 		if (!err)
 			html = content;
 
@@ -93,7 +102,8 @@ Article.prototype.updateArticle = function(id, article, callback) {
 					callback(null, {
 						_id: row._id,
 						subject: row.subject,
-						content: row.content
+						content: row.content,
+						html: row.html
 					});
 				});
 
@@ -123,7 +133,8 @@ Article.prototype.updateArticle = function(id, article, callback) {
 				callback(null, {
 					_id: row._id,
 					subject: row.subject,
-					content: row.content
+					content: row.content,
+					html: row.html
 				});
 			});
 

@@ -12,7 +12,9 @@ html
 		script
 			$(function() {
 				$('.popup').popup();
-				$('.dropdown').dropdown();
+				$('.dropdown').dropdown({
+					on: 'hover'
+				});
 			});
 		block script
 	body
