@@ -120,23 +120,33 @@ App.require('Article', function() {
 		});
 	});
 
+	function markup(head, end) {
+		var orig = editor.getSelection();
+		var content = orig.replace(/^\n*(\S*(\n+\S+)*)\n*$/, "$1");
+		var prefix = /^\n+/.exec(orig) || '';
+		var postfix = /\n+$/.exec(orig) || '';
+
+		editor.replaceSelection(prefix + head + content + end + postfix);
+	}
+
 	$('#toolbar_bold').on('click', function() {
-		editor.replaceSelection('**' + editor.getSelection() + '**');
+		markup('**', '**');
 		editor.focus();
 	});
 
 	$('#toolbar_italic').on('click', function() {
+		markup('*', '*');
 		editor.replaceSelection('*' + editor.getSelection() + '*');
 		editor.focus();
 	});
 
 	$('#toolbar_underline').on('click', function() {
-		editor.replaceSelection('<u>' + editor.getSelection() + '</u>');
+		markup('<u>', '</u>');
 		editor.focus();
 	});
 
 	$('#toolbar_strikethrough').on('click', function() {
-		editor.replaceSelection('~~' + editor.getSelection() + '~~');
+		markup('~~', '~~');
 		editor.focus();
 	});
 
@@ -146,7 +156,7 @@ App.require('Article', function() {
 	});
 
 	$('#toolbar_blockquote').on('click', function() {
-		editor.replaceSelection('\n> ' + editor.getSelection() + '\n');
+		markup('\n>', '\n');
 		editor.focus();
 	});
 
