@@ -224,7 +224,7 @@ App.require('Article', function() {
 		beforeSend: function(file, i, done) {
 			$('#upload_area').css('outline', '0px');
 
-			editor.replaceRange('![Testing]()', editor.getCursor());
+			editor.replaceSelection('![New Image]()');
 			editor.focus();
 		}
 	});
