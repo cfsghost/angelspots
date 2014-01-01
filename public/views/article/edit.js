@@ -18,6 +18,10 @@ App.require('Article', function() {
 			'</table>';
 	};
 
+	renderer.hr = function() {
+		return '<div class=\"ui divider\"></div>';
+	};
+
 	// Save
 	var saveRequired = false;
 	var saveRunner;
@@ -157,7 +161,10 @@ App.require('Article', function() {
 		$('#form_content_editor').hide();
 		$('#toolbar_edit').hide();
 
-		marked(editor.getValue(), { renderer: renderer }, function(err, content) {
+		marked(editor.getValue(), {
+			renderer: renderer,
+			breaks: true
+		}, function(err, content) {
 			$('#form_content_previewer').html(content);
 			$('#form_content_previewer').show();
 		});

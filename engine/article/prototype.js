@@ -11,6 +11,10 @@ renderer.table = function(header, body) {
 		'</table>';
 };
 
+renderer.hr = function() {
+	return '<div class=\"ui divider\"></div>';
+};
+
 var Article = module.exports = function() {
 	var self = this;
 };
@@ -77,7 +81,10 @@ Article.prototype.updateArticle = function(id, article, callback) {
 	}
 
 	var html = '';
-	marked(article.content || '', { renderer: renderer }, function(err, content) {
+	marked(article.content || '', {
+		renderer: renderer,
+		breaks: true
+	}, function(err, content) {
 		if (!err)
 			html = content;
 
