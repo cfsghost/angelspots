@@ -22,6 +22,10 @@ App.require('Article', function() {
 		return '<div class=\"ui divider\"></div>';
 	};
 
+	renderer.blockquote = function(content) {
+		return '<div class=\"ui message\">' + content + '</div>';
+	};
+
 	// Save
 	var saveRequired = false;
 	var saveRunner;

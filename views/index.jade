@@ -1,6 +1,7 @@
 extends layouts/home
 
 block script
+	link(href='/css/content.css', media='all', rel='stylesheet', type='text/css')
 	link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
 	script(type='text/javascript', src='/views/index.js')
 	script(type='text/javascript', src='/js/modernizr.custom.js')
@@ -12,7 +13,7 @@ block information
 		h1.ui.inverted.header #{configs.app.service_name}
 		p The thuth about startup life to inspire you
 
-	div.ui.center.angelspots
+	div.ui.center.angelspots.content
 		div.text#article_content
 
 block body

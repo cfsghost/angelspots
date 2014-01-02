@@ -15,6 +15,10 @@ renderer.hr = function() {
 	return '<div class=\"ui divider\"></div>';
 };
 
+renderer.blockquote = function(content) {
+	return '<div class=\"ui message\">' + content + '</div>';
+};
+
 var Article = module.exports = function() {
 	var self = this;
 };

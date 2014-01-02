@@ -89,7 +89,7 @@ a:hover {
 }
 
 .angelspots {
-	background: #f0f0f0;
+	background: #ffffff;
 	box-shadow: 0px 0px 5px rgba(81,64,49,0.5);
 	color: #000000;
 }
@@ -108,21 +108,4 @@ a:hover {
 .angelspots .text {
 	padding: 50px;
 	line-height: 150%;
-}
-
-.angelspots .text h1,
-.angelspots .text h2,
-.angelspots .text h3,
-.angelspots .text h4,
-.angelspots .text h5,
-.angelspots .text h6 {
-	line-height: 300%;
-}
-
-.angelspots .text pre {
-	background: #e0e0e0;
-	padding: 20px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
 }
