@@ -129,11 +129,19 @@ App.require('Article', function() {
 		});
 	});
 
-	function markup(head, end) {
+	function markup(head, end, individual) {
 		var orig = editor.getSelection();
 		var content = orig.replace(/^\n*(\S*(\n+\S+)*)\n*$/, "$1");
 		var prefix = /^\n+/.exec(orig) || '';
 		var postfix = /\n+$/.exec(orig) || '';
+
+		if (individual && prefix == '') {
+			prefix = '\n';
+		}
+
+		if (individual && postfix == '') {
+			postfix = '\n';
+		}
 
 		editor.replaceSelection(prefix + head + content + end + postfix);
 	}
@@ -165,12 +173,12 @@ App.require('Article', function() {
 	});
 
 	$('#toolbar_blockquote').on('click', function() {
-		markup('>', '\n');
+		markup('>', '\n', true);
 		editor.focus();
 	});
 
 	$('#toolbar_code').on('click', function() {
-		markup('```\n', '\n```');
+		markup('```\n', '\n```', true);
 		editor.focus();
 	});
 
