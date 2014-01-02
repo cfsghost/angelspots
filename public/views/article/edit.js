@@ -165,7 +165,12 @@ App.require('Article', function() {
 	});
 
 	$('#toolbar_blockquote').on('click', function() {
-		markup('\n>', '\n');
+		markup('>', '\n');
+		editor.focus();
+	});
+
+	$('#toolbar_code').on('click', function() {
+		markup('```\n', '\n```');
 		editor.focus();
 	});
 
