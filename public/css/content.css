@@ -9,11 +9,3 @@
 .angelspots.content h6 {
 	line-height: 300%;
 }
-
-.angelspots .text pre {
-	background: #e0e0e0;
-	padding: 20px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-}

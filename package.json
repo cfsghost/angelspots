@@ -26,6 +26,7 @@
     "dbhouse": ">= 0.0.26",
     "validator": "~2.0.0",
     "nodemailer": "~0.5.13",
-    "marked": "~0.3.0"
+    "marked": "~0.3.0",
+    "highlight.js": "~7.5.0"
   }
 }

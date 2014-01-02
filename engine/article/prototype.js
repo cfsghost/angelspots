@@ -1,6 +1,7 @@
 "use strict";
 
 var marked = require('marked');
+var hljs = require('highlight.js');
 
 // Initializing Renderer of Marked
 var renderer = new marked.Renderer();
@@ -17,6 +18,10 @@ renderer.hr = function() {
 
 renderer.blockquote = function(content) {
 	return '<div class=\"ui message\">' + content + '</div>';
+};       
+
+renderer.code = function(code, lang) {
+	return '<div class=\"ui message\"><pre><code class=\"lang-' + lang + '\">' + hljs.highlightAuto(code).value + '</code></pre></div>';
 };
 
 var Article = module.exports = function() {

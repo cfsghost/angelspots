@@ -26,6 +26,13 @@ App.require('Article', function() {
 		return '<div class=\"ui message\">' + content + '</div>';
 	};
 
+	renderer.code = function(code, lang) {
+		return '<div class=\"ui message\"><pre><code class=\"lang-' + lang + '\">' + hljs.highlightAuto(code).value + '</code></pre></div>';
+	};
+
+	// Initializing highlight
+	hljs.initHighlightingOnLoad();
+
 	// Save
 	var saveRequired = false;
 	var saveRunner;
@@ -88,8 +95,6 @@ App.require('Article', function() {
 			$('#toolbar_save').removeClass('disabled');
 
 		saveRequired = true;
-
-		console.log(true);
 	});
 
 	// Initializing subject input box
