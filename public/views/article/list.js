@@ -19,7 +19,7 @@ App.require('Article', function() {
 			var $header = $('<div>').addClass('header').text(doc.subject);
 			var $timestamp = $('<div>').addClass('description').text(ts.join(' '));
 			var $link = $('<a>').attr('href', '/edit_article/' + doc._id).addClass('item');
-			var $publish_label = $('<div>').addClass('ui label red right floated').text('Not yet published');
+			var $publish_label = $('<div>').addClass('ui label purple right floated').text('Draft');
 
 			$content.append($header).append($timestamp);
 			$link
