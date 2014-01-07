@@ -1,4 +1,5 @@
 .angelspots.content {
+	line-height: 180%;
 }
 
 .angelspots.content h1,
@@ -8,4 +9,8 @@
 .angelspots.content h5,
 .angelspots.content h6 {
 	line-height: 300%;
+}
+
+.angelspots.content .message {
+	line-height: 180%;
 }
