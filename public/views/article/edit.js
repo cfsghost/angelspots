@@ -107,9 +107,18 @@ App.require('Article', function() {
 
 	// Side panel
 	$('#sidepanel_publish_button').on('click', function() {
+
 		$('#publish_dialog')
 			.modal('setting', {
 				onApprove: function() {
+
+					// Publish
+					article.publish($('#article_id').val(), function() {
+
+						setTimeout(function() {
+							$('#publish_success_dialog').modal('show');
+						}, 600);
+					});
 				}
 			})
 			.modal('show');

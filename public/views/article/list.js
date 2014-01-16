@@ -19,12 +19,17 @@ App.require('Article', function() {
 			var $header = $('<div>').addClass('header').text(doc.subject);
 			var $timestamp = $('<div>').addClass('description').text(ts.join(' '));
 			var $link = $('<a>').attr('href', '/edit_article/' + doc._id).addClass('item');
-			var $publish_label = $('<div>').addClass('ui label purple right floated').text('Draft');
+			var $state_label = $('<div>').addClass('ui label right floated');
+
+			if (doc.published)
+				$state_label.addClass('green').text('Published');
+			else
+				$state_label.addClass('purple').text('Draft');
 
 			$content.append($header).append($timestamp);
 			$link
 				.append($content)
-				.append($publish_label);
+				.append($state_label);
 
 			$('#article_list').append($link);
 		});

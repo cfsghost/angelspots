@@ -236,3 +236,48 @@ Article.prototype.getArticleWithCondition = function(condition, opts, callback) 
 			callback(null, rows[0]);
 		});
 };
+
+Article.prototype.publish = function(id, callback) {
+	var self = this;
+
+	var engine = Article.engine;
+	var model = engine.database.model;
+	var db = engine.database.db;
+	var dbSettings = engine.settings.database;
+
+	if (!(callback instanceof Function))
+		return;
+
+	// Check permission
+	var conn = Article.frex.getConnection(arguments);
+	if (!conn.req.session.permission) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+		return;
+	}
+
+	if (!conn.req.session.permission.admin) {
+		callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+		return;
+	}
+
+	// Update article state
+	db.open(dbSettings.dbName)
+		.collection(dbSettings.table)
+		.model(model.schema)
+		.where({
+			_id: id
+		})
+		.limit(1)
+		.update({
+			published: true,
+			updated: Date.now()
+		}, function(err, row) {
+
+			if (err) {
+				callback(new Article.frex.Error('Failed', engine.statuscode.SYSERR));
+				return;
+			}
+
+			callback(null);
+		});
+};
