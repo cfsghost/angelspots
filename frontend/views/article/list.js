@@ -16,19 +16,31 @@ App.require('Article', function() {
 			];
 
 			var $item = $('<div>').addClass('ui item grid');
-			var $column = $('<div>').addClass('fourteen column wide');
+			var $column = $('<div>').addClass('twelve column wide');
 			var $content = $('<div>').addClass('content');
 			var $header = $('<div>').addClass('header').text(doc.subject);
 			var $timestamp = $('<div>').addClass('description').text(ts.join(' '));
 			var $link = $('<a>').attr('href', '/edit_article/' + doc._id);
 
-			var $control_column = $('<div>').addClass('two column wide');
-			var $state_button = $('<div>').addClass('ui button right floated horizontal');
+			var $control_column = $('<div>').addClass('four column wide');
 
-			if (doc.published)
-				$state_button.addClass('green').text('Published');
-			else
-				$state_button.addClass('purple').text('Draft');
+			// Create a label to display state of article and dropdown menu to set state
+			var state_button = semblance.component.create('article_button');
+			var $state_button = state_button.$dom;
+
+			if (doc.published) {
+				state_button.addFieldClass('buttons', 'teal');
+				state_button.setFieldValue('label', 'Publish');
+			} else {
+				state_button.addFieldClass('buttons', 'purple');
+				state_button.setFieldValue('label', 'Draft');
+			}
+
+			var menuItem = state_button.createSubComponent('item');
+			menuItem.setFieldValue('label', 'Publish Now');
+
+			// Enabling dropdown component
+			$state_button.find('.ui.dropdown').dropdown();
 
 			$content
 				.append($header)

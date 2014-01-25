@@ -4,3 +4,9 @@
 [submodule "3rd_party/CodeMirror"]
 	path = 3rd_party/CodeMirror
 	url = git@github.com:marijnh/CodeMirror.git
+[submodule "3rd_party/semblance.js"]
+	path = 3rd_party/semblance.js
+	url = git@github.com:cfsghost/semblance.js.git
+[submodule "3rd_party/jquery-filedrop"]
+	path = 3rd_party/jquery-filedrop
+	url = git@github.com:weixiyen/jquery-filedrop.git

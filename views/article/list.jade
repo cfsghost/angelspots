@@ -2,6 +2,7 @@ extends ../layouts/default
 
 block script
 	script(type='text/javascript', src='/views/article/list.js')
+	script(type='text/javascript', src='/js/semblance/semblance.min.js')
 
 block body
 
@@ -10,3 +11,18 @@ block body
 
 			div.ui.celled.animated.selection.list#article_list
 
+	sb-component#article_button
+
+		div.ui.buttons.right.floated.horizontal(name='buttons')
+
+			div.ui.button(name='label')
+
+			div.ui.floating.dropdown.icon.button
+				i.dropdown.icon
+				div.menu
+
+					sb-component(name='item')
+
+						div.item
+							i.ok.sign.icon
+							sb-variable(name='label')
