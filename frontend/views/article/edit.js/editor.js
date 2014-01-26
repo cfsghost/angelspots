@@ -55,8 +55,7 @@ Editor.prototype.enabledAutosave = function(enabled) {
 			return;
 
 		// Saving it right now
-		self.func.save(function(err, doc) {
-		});
+		self.save();
 	}
 
 	if (enabled) {
@@ -65,6 +64,12 @@ Editor.prototype.enabledAutosave = function(enabled) {
 		self.saveRequired = false;
 		self.state = 'ready';
 		self.saveRunner = setInterval(autosave, 3000);
+	} else {
+
+		self.saveRequired = false;
+		self.state = 'ready';
+		clearInterval(self.saveRunner);
+		self.saveRunner = null;
 	}
 };
 
@@ -77,9 +82,9 @@ Editor.prototype.load = function(content) {
 Editor.prototype.save = function(callback) {
 	var self = this;
 
-	self.savingRef++;
 	self.saveRequired = false;
 	self.state = 'saving';
+	self.savingRef++;
 
 	// Disable save button
 	$('#toolbar_save').addClass('disabled');
@@ -91,6 +96,9 @@ Editor.prototype.save = function(callback) {
 		if (self.savingRef == 0)
 			self.state = 'ready';
 
-		callback(err);
+		self.emit('saved');
+
+		if (callback)
+			callback(err);
 	});
 };

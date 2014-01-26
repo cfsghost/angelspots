@@ -7,14 +7,6 @@ App.require('Article', function() {
 		$('#article_id').val(article_id);
 	}
 
-	// Initializing subject input box
-	$('#article_subject').on('input', function() {
-		if (state == 'ready')
-			$('#toolbar_save').removeClass('disabled');
-
-		saveRequired = true;
-	});
-
 	// Side panel
 	$('#sidepanel_publish_button').on('click', function() {
 
@@ -77,6 +69,15 @@ App.require('Article', function() {
 	} else {
 		editor.enabledAutosave(true);
 	}
+
+	// Initializing subject input box
+	$('#article_subject').on('input', function() {
+		if (editor.state == 'ready')
+			$('#toolbar_save').removeClass('disabled');
+
+		editor.saveRequired = true;
+	});
+
 /*
 	// Initializing Uploader
 	$('#upload_area').filedrop({
