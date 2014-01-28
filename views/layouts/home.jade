@@ -15,11 +15,23 @@ html
 				$('.dropdown').dropdown({
 					on: 'hover'
 				});
+
+				$(window).scroll(function(){
+					var y = $(window).scrollTop();
+
+					if( y > 0 ){
+						$('#navbar').addClass('moving');
+						$('#navbar').removeClass('above');
+					} else {
+						$('#navbar').removeClass('moving');
+						$('#navbar').addClass('above');
+					}
+				});
 			});
 		block script
 	body
 
-		div.ui.fixed.top.navbar.menu
+		div.ui.fixed.top.navbar.menu.above#navbar
 
 			div.ui.menu
 
