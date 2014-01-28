@@ -22,7 +22,8 @@ html
 		div.ui.fixed.top.navbar.menu
 
 			div.ui.menu
-				a.item.header(href='/') #{configs.app.service_name}
+
+				a.item(href='/') #{configs.app.service_name}
 
 				div.right.menu
 					- if (session.name)
