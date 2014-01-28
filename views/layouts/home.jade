@@ -31,13 +31,19 @@ html
 		block script
 	body
 
-		div.ui.fixed.top.navbar.menu.above#navbar
+		div.ui.fixed.top.transparent.navbar.menu.above#navbar
 
 			div.ui.menu
 
 				a.item(href='/') #{configs.app.service_name}
 
 				div.right.menu
+
+					div.item
+						div.ui.left.icon.input.navbar-search-input
+							i.search.icon
+							input(type='text', placeholder='Search...')
+
 					- if (session.name)
 						a.item.popup(href='/edit_article', data-content='Create a new article', data-position='bottom center', data-variation='inverted')
 							i.plus.icon
