@@ -2,6 +2,19 @@
 App.require('Article', function() {
 	var article = App.Engine('Article');
 
+	article.listArticles({}, function(err, articles) {
+
+		articles.forEach(function(doc, index, arr) {
+
+			var item = semblance.component.create('article_item');
+			item.setFieldValue('cover', 'images/test-photo.jpg');
+			item.setFieldValue('name', doc.subject);
+
+			$('#dashboard').append(item.$dom);
+
+		});
+	});
+/*
 	article.getArticleWithCondition({}, {}, function(err, doc) {
 		$('#article_content').html(doc.html);
 
@@ -31,5 +44,5 @@ App.require('Article', function() {
 			}
 		});
 	});
-	
+*/	
 });

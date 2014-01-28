@@ -5,21 +5,29 @@ block script
 	link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
 	link(href='http://yandex.st/highlightjs/7.5/styles/default.min.css', rel='stylesheet', type='text/css')
 	script(type='text/javascript', src='/views/index.js')
-	script(type='text/javascript', src='/js/modernizr.custom.js')
-	script(type='text/javascript', src='/js/jquerypp.custom.js')
-	script(type='text/javascript', src='/js/jquery.bookblock.min.js')
-
-block information
-	div.ui.information.transition
-		h1.ui.inverted.header #{configs.app.service_name}
-		p The thruth about startup life to inspire you
-
-	div.ui.center.angelspots.content
-		div#article_content
+	script(type='text/javascript', src='/js/semblance/semblance.min.js')
+	//
+		script(type='text/javascript', src='/js/modernizr.custom.js')
+		script(type='text/javascript', src='/js/jquerypp.custom.js')
+		script(type='text/javascript', src='/js/jquery.bookblock.min.js')
 
 block body
 
-		//
-			div.bb-bookblock#book
-				div.bb-item
-					div.text#article_content
+	div.ui.items#dashboard
+
+	sb-component#article_item
+		div.item.article-item
+			div.image
+				img(name='cover')
+			div.content
+				div.name(name='name')
+				p.description
+		
+	//
+		div.ui.center.angelspots.content
+			div#article_content
+
+	//
+		div.bb-bookblock#book
+			div.bb-item
+				div.text#article_content

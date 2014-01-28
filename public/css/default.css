@@ -9,6 +9,8 @@ body {
 	padding: 0px;
 	margin: 0px;
 	text-rendering: optimizeLegibility;
+	margin-top: 40px;
+	background: #e5e5e5;
 }
 
 a {
@@ -103,4 +105,8 @@ a:hover {
 
 .angelspots .bb-item {
 	box-shadow: 0 12px 20px -10px rgba(81,64,49,0.6);
+}
+
+.ui.items .item.article-item {
+	padding: 0px;
 }

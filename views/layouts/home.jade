@@ -19,44 +19,41 @@ html
 		block script
 	body
 
-		div.ui.inverted.page.grid.masthead.segment
-			div.column
-				div.ui.menu.inverted.secondary.pointing.active
-					a.header.item(href='/') #{configs.app.service_name}
-					a.item(href='/about') 關於我們
+		div.ui.fixed.top.navbar.menu
 
-					div.right.menu
-						- if (session.name)
-							a.item.popup(href='/edit_article', data-content='Create a new article', data-position='bottom center', data-variation='inverted')
-								i.plus.icon
+			div.ui.menu
+				a.item.header(href='/') #{configs.app.service_name}
 
-							a.item.popup(href='/list_article', data-content='List articles', data-position='bottom center', data-variation='inverted')
-								i.list.icon
+				div.right.menu
+					- if (session.name)
+						a.item.popup(href='/edit_article', data-content='Create a new article', data-position='bottom center', data-variation='inverted')
+							i.plus.icon
 
-							div.ui.dropdown.item
-								i.user.icon
-								!= session.name
-								i.dropdown.icon
-								div.menu
+						a.item.popup(href='/list_article', data-content='List articles', data-position='bottom center', data-variation='inverted')
+							i.list.icon
 
-									- if (session.username != 'admin')
-										a.item(href='/profile')
+						div.ui.dropdown.item
+							i.user.icon
+							span#session_username #{session.name}
+							i.dropdown.icon
+							div.menu
+
+								- if (session.username != 'admin')
+									a.item(href='/profile')
+										i.edit.icon
+										!='Edit Profile'
+
+								- if (session.permission)
+									- if (session.permission.admin)
+										a.item(href='/admin')
 											i.edit.icon
-											!='Edit Profile'
+											!='Manage Service'
 
-									- if (session.permission)
-										- if (session.permission.admin)
-											a.item(href='/admin')
-												i.edit.icon
-												!='Manage Service'
-
-									a.item(href='/signout')
-										i.sign.out.icon
-										!='Sign Out'
-						- else
-							a.item.popup(href='/signin', data-content='Sign In right now', data-position='bottom center', data-variation='inverted') Sign In
-
-				block information
+								a.item(href='/signout')
+									i.sign.out.icon
+									!='Sign Out'
+					- else
+						a.item.popup(href='/signin', data-content='Sign In right now', data-position='bottom center', data-variation='inverted') Sign In
 
 		block body
 
