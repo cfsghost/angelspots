@@ -12,8 +12,18 @@ App.require('Article', function() {
 
 			$('#dashboard').append(item.$dom);
 
+			item.$dom.on('click', function() {
+				paper.setFieldValue('subject', doc.subject);
+				paper.setFieldHTMLValue('content', doc.html);
+				paper.$dom.modal('show');
+			});
+
 		});
 	});
+
+	// Initializing article paper
+	var paper = semblance.component.create('article_paper');
+	$('body').append(paper.$dom);
 /*
 	article.getArticleWithCondition({}, {}, function(err, doc) {
 		$('#article_content').html(doc.html);
