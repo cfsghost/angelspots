@@ -77,6 +77,10 @@ a:hover {
 	}
 }
 
+sb-component {
+	display: none;
+}
+
 .sidebar_menu {
 	margin-top: 4em;
 	margin-left: 0px;
@@ -123,6 +127,6 @@ a:hover {
 	padding: 0px;
 }
 
-.dashboard {
-	padding-top: 2em;
+.ui.grid.dashboard {
+	padding-top: 1em;
 }

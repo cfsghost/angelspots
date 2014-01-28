@@ -2,7 +2,8 @@ extends layouts/home
 
 block script
 	link(href='/css/content.css', media='all', rel='stylesheet', type='text/css')
-	link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
+	//
+		link(href='/css/bookblock.css', media='all', rel='stylesheet', type='text/css')
 	link(href='http://yandex.st/highlightjs/7.5/styles/default.min.css', rel='stylesheet', type='text/css')
 	script(type='text/javascript', src='/views/index.js')
 	script(type='text/javascript', src='/js/semblance/semblance.min.js')
@@ -13,8 +14,9 @@ block script
 
 block body
 
-	div.dashboard
-		div.ui.items#dashboard
+	div.dashboard.ui.grid
+		div.column
+			div.ui.three.items#dashboard
 
 	sb-component#article_item
 		a.article-item.item(name='link')
