@@ -1,17 +1,33 @@
-.angelspots.content {
+.article.paper {
+	padding: 0px;
+}
+
+img.ui.image.article.cover {
+	border-bottom-left-radius: 0px; 
+	-moz-border-bottom-left-radius: 0px; 
+	-webkit-border-bottom-left-radius: 0px;
+
+	border-bottom-right-radius: 0px; 
+	-moz-border-bottom-right-radius: 0px; 
+	-webkit-border-bottom-right-radius: 0px;
+}
+
+.article.content {
 	line-height: 180%;
-	padding: 100px;
+	padding: 6em;
+	padding-top: 0px;
+	color: #555555;
 }
 
-.angelspots.content h1,
-.angelspots.content h2,
-.angelspots.content h3,
-.angelspots.content h4,
-.angelspots.content h5,
-.angelspots.content h6 {
-	line-height: 300%;
+.article.content h1,
+.article.content h2,
+.article.content h3,
+.article.content h4,
+.article.content h5,
+.article.content h6 {
+	line-height: 200%;
 }
 
-.angelspots.content .message {
+.article.content .message {
 	line-height: 180%;
 }

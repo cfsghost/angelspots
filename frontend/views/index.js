@@ -7,17 +7,18 @@ App.require('Article', function() {
 		articles.forEach(function(doc, index, arr) {
 
 			var item = semblance.component.create('article_item');
+			item.setFieldAttr('link', 'href', '/article/' + doc._id);
 			item.setFieldValue('cover', 'images/test-photo.jpg');
 			item.setFieldValue('name', doc.subject);
 
 			$('#dashboard').append(item.$dom);
-
+/*
 			item.$dom.on('click', function() {
 				paper.setFieldValue('subject', doc.subject);
 				paper.setFieldHTMLValue('content', doc.html);
 				paper.$dom.modal('show');
 			});
-
+*/
 		});
 	});
 

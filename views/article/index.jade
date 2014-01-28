@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block script
+	link(href='/css/content.css', media='all', rel='stylesheet', type='text/css')
+	link(href='http://yandex.st/highlightjs/7.5/styles/default.min.css', rel='stylesheet', type='text/css')
+	script(type='text/javascript', src='/views/index.js')
+	script(type='text/javascript', src='/js/semblance/semblance.min.js')
+
+block body
+
+	div.ui.grid
+		div.three.wide.column
+		div.ten.wide.column
+			div.ui.raised.segment.article.paper
+				img.ui.image.rounded.article.cover(src='/images/test-photo.jpg')
+				div.article.content !{article_html}
