@@ -30,11 +30,6 @@ var Editor = function(selector) {
 		padding: '0px'
 	});
 
-	// Initializing previewer
-	$('#form_content_previewer').css({
-		padding: '30px'
-	});
-
 	// Autosave implementation
 	self.saveRequired = false;
 	self.saveRunner;
