@@ -30,7 +30,9 @@ var Func = function(editor) {
 };
 
 Func.prototype.markup = function(head, end, individual) {
-	var orig = editor.getSelection();
+	var self = this;
+
+	var orig = self.editor.getSelection();
 	var content = orig.replace(/^\n*(\S*(\n+\S+)*)\n*$/, "$1");
 	var prefix = /^\n+/.exec(orig) || '';
 	var postfix = /\n+$/.exec(orig) || '';
