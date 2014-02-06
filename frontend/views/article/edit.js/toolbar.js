@@ -46,12 +46,12 @@ var Toolbar = function(editor) {
 
 	// Blockquote
 	$('#toolbar_blockquote').on('click', function() {
-		editor.focus();
+		self.editor.func.blockquote();
 	});
 
 	// Code
 	$('#toolbar_code').on('click', function() {
-		editor.focus();
+		self.editor.func.block();
 	});
 
 	// Preview mode
