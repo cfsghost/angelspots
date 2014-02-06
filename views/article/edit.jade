@@ -78,7 +78,15 @@ block body
 
 			div.sixteen.wide.column
 
-				div.ui.raised.segment.article.paper
+				div.ui.raised.segment.article.paper.dimmable#upload_area
+
+					div.ui.dimmer.hidden
+
+						div.content
+							div.center
+								h2.ui.inverted.icon.header
+									i.icon.circular.inverted.green.cloud.upload
+									!='Drop picture to upload'
 
 					div.editarea#form_content_editor
 					div.article.content(style='display: none;')#form_content_previewer

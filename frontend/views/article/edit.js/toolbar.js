@@ -89,5 +89,7 @@ var Toolbar = function(editor) {
 		$('#toolbar_edit').show();
 		self.editor.$editor.show();
 		$('#form_content_previewer').hide();
+
+		self.editor.core.focus();
 	});
 };

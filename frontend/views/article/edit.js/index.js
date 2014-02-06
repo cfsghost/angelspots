@@ -78,23 +78,37 @@ App.require('Article', function() {
 		editor.saveRequired = true;
 	});
 
-/*
 	// Initializing Uploader
 	$('#upload_area').filedrop({
 		allowedfiletypes: [ 'image/jpeg', 'image/png', 'image/gif' ],
 		allowedfileextensions: [ '.jpg', '.jpeg', '.png', '.gif' ],
 		dragOver: function() {
-			$('#upload_area').css('outline', '3px dashed #aaaaaa');
+			if ($('#upload_area').dimmer('is active'))
+				return;
+
+			$('#upload_area')
+				.css('outline', '3px dashed #aaaaaa')
+				.dimmer('show');
 		},
 		dragLeave: function() {
-			$('#upload_area').css('outline', '0px');
+
+			if (!$('#upload_area').dimmer('is active'))
+				return;
+
+			$('#upload_area')
+				.css('outline', '0px')
+				.dimmer('hide');
+
+			console.log('123123123123');
 		},
 		beforeSend: function(file, i, done) {
-			$('#upload_area').css('outline', '0px');
+			$('#upload_area')
+				.css('outline', '0px')
+				.dimmer('hide');
 
-			editor.replaceSelection('![New Image]()');
-			editor.focus();
+			//editor.replaceSelection('![New Image]()');
+			//editor.focus();
 		}
 	});
-*/
+
 });
