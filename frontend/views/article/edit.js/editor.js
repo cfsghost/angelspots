@@ -26,8 +26,7 @@ var Editor = function(selector) {
 
 	// Initializing editor
 	self.$editor.css({
-		height: '100%',
-		padding: '0px'
+		height: '100%'
 	});
 
 	// Autosave implementation

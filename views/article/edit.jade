@@ -3,7 +3,7 @@ extends ../layouts/default
 block script
 	link(href='/css/content.css', rel='stylesheet', type='text/css')
 	link(href='/CodeMirror/codemirror.css', rel='stylesheet', type='text/css')
-	link(href='/CodeMirror/theme/base16-light.css', rel='stylesheet', type='text/css')
+	link(href='/CodeMirror/theme/angelspots-light.css', rel='stylesheet', type='text/css')
 	link(href='http://yandex.st/highlightjs/7.5/styles/default.min.css', rel='stylesheet', type='text/css')
 	script(type='text/javascript', src='/js/fulfill.js')
 	script(type='text/javascript', src='/js/marked.js')
@@ -26,10 +26,11 @@ block body
 				div.sixteen.wide.column
 
 					div.ui.input.icon.left.fluid
+
 						input#article_subject(type='text', name='name', placeholder='Subject')
 						i.bookmark.icon
 
-					div.ui.menu.tabular
+					div.ui.menu.tabular.toolbar-panel
 
 						div.menu.left#toolbar_edit
 
@@ -77,12 +78,9 @@ block body
 
 			div.sixteen.wide.column
 
-				div.attached.message
-					div.header
+				div.ui.raised.segment.article.paper
 
-				div.ui.fluid.form.attached.segment#upload_area(style='padding: 0px;')
-
-					div#form_content_editor
+					div.editarea#form_content_editor
 					div.article.content(style='display: none;')#form_content_previewer
 
 	div.ui.small.modal#publish_dialog
