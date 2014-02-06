@@ -4,6 +4,7 @@ var Toolbar = function(editor) {
 	var self = this;
 
 	self.editor = editor;
+	self.$dom = $('#toolbar'); 
 
 	// Save button
 	$('#toolbar_save').on('click', function() {

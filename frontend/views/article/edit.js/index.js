@@ -27,7 +27,7 @@ App.require('Article', function() {
 	});
 
 	$('.ui.modal').modal();
-	$('.attached.message .header .ui.button').popup();
+	$('#toolbar_edit .ui.button').popup();
 
 	// Initializing editor
 	var editor = new Editor('#form_content_editor');

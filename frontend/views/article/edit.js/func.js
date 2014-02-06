@@ -32,7 +32,7 @@ var Func = function(editor) {
 Func.prototype.markup = function(head, end, individual) {
 	var self = this;
 
-	var orig = self.editor.getSelection();
+	var orig = self.editor.core.getSelection();
 	var content = orig.replace(/^\n*(\S*(\n+\S+)*)\n*$/, "$1");
 	var prefix = /^\n+/.exec(orig) || '';
 	var postfix = /\n+$/.exec(orig) || '';
@@ -45,7 +45,7 @@ Func.prototype.markup = function(head, end, individual) {
 		postfix = '\n';
 	}
 
-	self.core.replaceSelection(prefix + head + content + end + postfix);
+	self.editor.core.replaceSelection(prefix + head + content + end + postfix);
 };
 
 Func.prototype.focus = function() {

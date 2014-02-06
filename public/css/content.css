@@ -17,6 +17,9 @@ img.ui.image.article.cover {
 	padding: 6em;
 	padding-top: 0px;
 	color: #555555;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	word-break: normal;
 }
 
 .article.content h1,

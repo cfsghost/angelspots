@@ -9,7 +9,6 @@ body {
 	padding: 0px;
 	margin: 0px;
 	text-rendering: optimizeLegibility;
-	margin-top: 4em;
 	background: #e5e5e5;
 }
 
@@ -127,6 +126,24 @@ sb-component {
 	padding: 0px;
 }
 
-.ui.grid.dashboard {
-	padding-top: 1em;
+.ui.fixed.menu+.ui.grid.dashboard {
+	padding-top: 4.5rem;
+}
+
+.ui.fixed.menu+.toolbar {
+	padding-top: 4rem;
+}
+
+.editor.toolbar {
+	position: fixed;
+	width: 100%;
+	margin-top: 1rem;
+	background-color: #f0f0f0;
+	z-index: 500;
+	-webkit-box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1) !important;
+	box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.editor.toolbar+.editor.viewport {
+	padding-top: 11.5rem;
 }
