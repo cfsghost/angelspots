@@ -152,6 +152,10 @@ sb-component {
 	padding-top: 11.5rem;
 }
 
+.editor.viewport .ui.stackable.grid {
+	margin: 0px;
+}
+
 .editor.viewport .editarea {
 	padding: 6em;
 }

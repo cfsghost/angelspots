@@ -19,11 +19,12 @@ block body
 
 		input#article_id(type='hidden', value='#{article_id}')
 
-		div.ui.page.grid
+		div.ui.stackable.grid
 
 			div.row
 
-				div.sixteen.wide.column
+				div.three.wide.column
+				div.ten.wide.column
 
 					div.ui.input.icon.left.fluid
 
@@ -72,24 +73,27 @@ block body
 
 			div.ui.teal.button#sidepanel_publish_button Publish
 
-	div.ui.editor.viewport
+	div.editor.viewport
 
-		div.ui.page.grid
+		div.ui.stackable.grid
 
-			div.sixteen.wide.column
+			div.row
 
-				div.ui.raised.segment.article.paper.dimmable#upload_area
+				div.three.wide.column
+				div.ten.wide.column
 
-					div.ui.dimmer.hidden
+					div.ui.raised.segment.article.paper.dimmable#upload_area
 
-						div.content
-							div.center
-								h2.ui.inverted.icon.header
-									i.icon.circular.inverted.green.cloud.upload
-									!='Drop picture to upload'
+						div.ui.dimmer.hidden
 
-					div.editarea#form_content_editor
-					div.article.content(style='display: none;')#form_content_previewer
+							div.content
+								div.center
+									h2.ui.inverted.icon.header
+										i.icon.circular.inverted.green.cloud.upload
+										!='Drop picture to upload'
+
+						div.editarea#form_content_editor
+						div.article.content(style='display: none;')#form_content_previewer
 
 	div.ui.small.modal#publish_dialog
 
