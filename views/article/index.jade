@@ -19,3 +19,9 @@ block body
 				img.ui.image.rounded.article.cover(src='/images/test-photo.jpg')
 				div.article.content !{article_html}
 
+		div.column
+
+			- if (session.permission.admin)
+				a.popup(href='/edit_article/#{article_id}', data-content='Edit this article', data-position='left center', data-variation='inverted')
+					i.large.circular.edit.sign.icon.inverted.red
+

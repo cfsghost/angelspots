@@ -126,6 +126,10 @@ sb-component {
 	padding: 0px;
 }
 
+.ui.fixed.menu+.ui.grid {
+	padding-top: 4.5rem;
+}
+
 .ui.fixed.menu+.ui.grid.dashboard {
 	padding-top: 4.5rem;
 }
