@@ -144,16 +144,27 @@ sb-component {
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.12) !important;
 }
 
+.editor.toolbar .ui.grid {
+	margin: 0 0;
+}
+
 .editor.toolbar .toolbar-panel {
 	border: 0px;
 }
 
-.editor.toolbar+.editor.viewport {
-	padding-top: 11.5rem;
+.editor.viewport {
+	height: 100% !important;
 }
 
-.editor.viewport {
-	overflow-x: hidden;
+.editor.toolbar+.editor.viewport .ui.stackable.grid {
+	margin: 0 0;
+	padding-top: 11.5rem;
+	height: 100% !important;
+}
+
+.editor.viewport .workarea {
+	height: 100% !important;
+	overflow-y: scroll;
 }
 
 .editor.viewport .editarea {
