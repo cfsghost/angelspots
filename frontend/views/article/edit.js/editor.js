@@ -6,6 +6,7 @@ var Editor = function(selector) {
 	self.func = new Func(self);
 	self.toolbar = new Toolbar(self);
 	self.$editor = $(selector);
+	self.mode = 'edit';
 
 	// Initializing editor engine
 	self.core = CodeMirror(self.$editor[0], {
@@ -33,6 +34,23 @@ var Editor = function(selector) {
 	self.saveRequired = false;
 	self.saveRunner;
 	self.savingRef = 0;
+
+	$(document).keydown(function(e) {
+		if (e.keyCode == 82 && e.ctrlKey) {
+			// ignore Ctrl+R
+			e.preventDefault();
+
+		} else if (e.keyCode == 82 && e.altKey) {
+
+			// Alt + R to switch mode
+			if (self.mode == 'edit')
+				self.preview();
+			else
+				self.edit();
+
+			e.preventDefault();
+        }
+	});
 };
 
 jQuery.extend(Editor.prototype, jQuery.EventEmitter);
@@ -65,6 +83,20 @@ Editor.prototype.enabledAutosave = function(enabled) {
 		clearInterval(self.saveRunner);
 		self.saveRunner = null;
 	}
+};
+
+Editor.prototype.preview = function() {
+	var self = this;
+
+	self.mode = 'preview';
+	self.emit('mode', self.mode);
+};
+
+Editor.prototype.edit = function() {
+	var self = this;
+
+	self.mode = 'edit';
+	self.emit('mode', self.mode);
 };
 
 Editor.prototype.load = function(content) {
